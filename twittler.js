@@ -22,19 +22,23 @@ var refreshTweets = function(postArray){
     });
 };
 var refreshPage = function (){
-    var btn = $(".refreshBtn");
     var postArray;
     if(hashTag() === "" || hashTag() === undefined){
         postArray = streams.home;
     }else{
         postArray = streams.users[hashTag()];
-       
     }
+    $(".refreshBtn").attr("href", "#"+hashTag());
     refreshTweets(postArray);
 };
 $(document).ready(function(){
     refreshPage();
-    btn.click(function(){
+    $(".refreshBtn").click(function(){
+        setTimeout(function(){
+            refreshPage();
+        }, 0);
+    });
+    $("h1 a").click(function(){
         setTimeout(function(){
         refreshPage();
         }, 0);
